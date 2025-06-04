@@ -4,10 +4,10 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class UserData
+public class UserData1
 {
     public string userName = "D";
-    public int balance = 100000;
-    public int cash = 80000;
-}
+    public int cash;
+    public int balance;
 
+}
