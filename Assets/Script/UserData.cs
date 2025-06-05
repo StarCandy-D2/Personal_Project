@@ -6,8 +6,10 @@ using UnityEngine;
 [System.Serializable]
 public class UserData
 {
-    public string userName = "D";
-    public int balance = 100000;
-    public int cash = 80000;
+    public string userID;
+    public string userName;
+    public string userPassword;
+    public int balance;
+    public int cash;
 }
 
