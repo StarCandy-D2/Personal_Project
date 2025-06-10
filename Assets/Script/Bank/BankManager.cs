@@ -4,13 +4,13 @@ using System.IO;
 using TMPro;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class BankManager : MonoBehaviour
 {
     public TextMeshProUGUI cash;
     public TextMeshProUGUI balance;
     public TextMeshProUGUI name;
 
-    public static GameManager Instance;
+    public static BankManager Instance;
     public static BankUI bankUI;
     public UserData currentUser { get; private set; }
     public UserDataManager userDataManager;

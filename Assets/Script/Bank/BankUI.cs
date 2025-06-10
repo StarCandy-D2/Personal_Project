@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class BankUI : MonoBehaviour
 {
-    public GameManager gameManager;
+    public BankManager bankManager;
     public UserDataManager userDataManager;
 
     public GameObject notEnough;
@@ -35,7 +35,7 @@ public class BankUI : MonoBehaviour
 
     public void Start()
     {
-        GameManager.Instance.UpdateDisplay();
+        BankManager.Instance.UpdateDisplay();
     }
     public void Ondeposit()
     {
@@ -44,22 +44,22 @@ public class BankUI : MonoBehaviour
     }
     public void Deposit10000()
     {
-        if (GameManager.Instance.currentUser.cash >= 10000)
+        if (BankManager.Instance.currentUser.cash >= 10000)
         {
-            GameManager.Instance.currentUser.cash -= 10000;
-            GameManager.Instance.currentUser.balance += 10000;
-            GameManager.Instance.UpdateDisplay();
+            BankManager.Instance.currentUser.cash -= 10000;
+            BankManager.Instance.currentUser.balance += 10000;
+            BankManager.Instance.UpdateDisplay();
         }
         else { OnNotEnough(); }
     }
 
     public void Deposit30000()
     {
-        if (GameManager.Instance.currentUser.cash >= 30000)
+        if (BankManager.Instance.currentUser.cash >= 30000)
         {
-            GameManager.Instance.currentUser.cash -= 30000;
-            GameManager.Instance.currentUser.balance += 30000;
-            GameManager.Instance.UpdateDisplay();  
+            BankManager.Instance.currentUser.cash -= 30000;
+            BankManager.Instance.currentUser.balance += 30000;
+            BankManager.Instance.UpdateDisplay();  
 
         }
         else { OnNotEnough(); }
@@ -67,11 +67,11 @@ public class BankUI : MonoBehaviour
 
     public void Deposit50000()
     {
-        if (GameManager.Instance.currentUser.cash >= 50000)
+        if (BankManager.Instance.currentUser.cash >= 50000)
         {
-            GameManager.Instance.currentUser.cash -= 50000;
-            GameManager.Instance.currentUser.balance += 50000;
-            GameManager.Instance.UpdateDisplay();
+            BankManager.Instance.currentUser.cash -= 50000;
+            BankManager.Instance.currentUser.balance += 50000;
+            BankManager.Instance.UpdateDisplay();
 
         }
         else { OnNotEnough(); }
@@ -80,11 +80,11 @@ public class BankUI : MonoBehaviour
     {
         if (int.TryParse(depositcustom.text, out int value) && value > 0)
         {
-            if (GameManager.Instance.currentUser.cash >= value)
+            if (BankManager.Instance.currentUser.cash >= value)
             {
-                GameManager.Instance.currentUser.cash -= value;
-                GameManager.Instance.currentUser.balance += value;
-                GameManager.Instance.UpdateDisplay();
+                BankManager.Instance.currentUser.cash -= value;
+                BankManager.Instance.currentUser.balance += value;
+                BankManager.Instance.UpdateDisplay();
             }
             else
             {
@@ -104,11 +104,11 @@ public class BankUI : MonoBehaviour
     }
     public void WithDraw10000()
     {
-        if (GameManager.Instance.currentUser.balance >= 10000)
+        if (BankManager.Instance.currentUser.balance >= 10000)
         {
-            GameManager.Instance.currentUser.cash += 10000;
-            GameManager.Instance.currentUser.balance -= 10000;
-            GameManager.Instance.UpdateDisplay();
+            BankManager.Instance.currentUser.cash += 10000;
+            BankManager.Instance.currentUser.balance -= 10000;
+            BankManager.Instance.UpdateDisplay();
 
         }
         else { OnNotEnough(); }
@@ -116,11 +116,11 @@ public class BankUI : MonoBehaviour
 
     public void WithDraw30000()
     {
-        if (GameManager.Instance.currentUser.balance >= 30000)
+        if (BankManager.Instance.currentUser.balance >= 30000)
         {
-            GameManager.Instance.currentUser.cash += 30000;
-            GameManager.Instance.currentUser.balance -= 30000;
-            GameManager.Instance.UpdateDisplay();
+            BankManager.Instance.currentUser.cash += 30000;
+            BankManager.Instance.currentUser.balance -= 30000;
+            BankManager.Instance.UpdateDisplay();
 
         }
         else { OnNotEnough(); }
@@ -128,12 +128,12 @@ public class BankUI : MonoBehaviour
 
     public void WithDraw50000()
     {
-        if (GameManager.Instance.currentUser.balance >= 50000)
+        if (BankManager.Instance.currentUser.balance >= 50000)
         {
-            GameManager.Instance.currentUser.cash += 50000;
-            GameManager.Instance.currentUser.balance -= 50000;
-            GameManager.Instance.UpdateDisplay();
-
+            BankManager.Instance.currentUser.cash += 50000;
+            BankManager.Instance.currentUser.balance -= 50000;
+            BankManager.Instance.UpdateDisplay();
+                
         }
         else { OnNotEnough(); }
     }
@@ -142,14 +142,14 @@ public class BankUI : MonoBehaviour
     {
         if (int.TryParse(withdrawcustom.text, out int value) && value > 0)
         {
-            if (GameManager.Instance.currentUser.balance >= value)
-            {
-                GameManager.Instance.currentUser.cash += value;
-                GameManager.Instance.currentUser.balance -= value;
-                GameManager.Instance.UpdateDisplay();
+            if (BankManager.Instance.currentUser.balance >= value)
+            {   
+                BankManager.Instance.currentUser.cash += value;
+                BankManager.Instance.currentUser.balance -= value;
+                BankManager.Instance.UpdateDisplay();
             }
             else
-            {
+            {       
                 OnNotEnough();
             }
         }
@@ -163,11 +163,11 @@ public class BankUI : MonoBehaviour
     }
     public void SaveFromUI()
     {
-        if (GameManager.Instance.currentUser != null)
+        if (BankManager.Instance.currentUser != null)
         {
-            GameManager.Instance.currentUser.userName = gameManager.name.text;
-            GameManager.Instance.currentUser.cash = int.Parse(gameManager.cash.text.Replace(",", ""));
-            GameManager.Instance.currentUser.balance = int.Parse(gameManager.balance.text.Replace(",", ""));
+            BankManager.Instance.currentUser.userName = bankManager.name.text;
+            BankManager.Instance.currentUser.cash = int.Parse(bankManager.cash.text.Replace(",", ""));
+            BankManager.Instance.currentUser.balance = int.Parse(bankManager.balance.text.Replace(",", ""));
         }
     }
     public void OnNotEnough()
@@ -186,7 +186,7 @@ public class BankUI : MonoBehaviour
 
         if (userDataManager.ValidateLogin(id, pw, out UserData loggedInUser))
         {
-            GameManager.Instance.SetCurrentUser(loggedInUser); // 아래에 따로 설명
+            BankManager.Instance.SetCurrentUser(loggedInUser); // 아래에 따로 설명
             popupLogin.SetActive(false);
             popupBank.SetActive(true);
         }
@@ -268,7 +268,7 @@ public class BankUI : MonoBehaviour
     }
     public void LogoutButtonPressed()
     {
-        GameManager.Instance.Logout();
+        BankManager.Instance.Logout();
 
         popupBank.SetActive(false);
         popupLogin.SetActive(true);
@@ -293,7 +293,7 @@ public class BankUI : MonoBehaviour
             return;
         }
 
-        UserData sender = GameManager.Instance.currentUser;
+        UserData sender = BankManager.Instance.currentUser;
         if (sender.balance < amount)
         {
             Debug.LogWarning("잔액 부족");
@@ -315,7 +315,7 @@ public class BankUI : MonoBehaviour
 
         // 저장 및 UI 반영
         userDataManager.SaveUserData();
-        GameManager.Instance.UpdateDisplay();
+        BankManager.Instance.UpdateDisplay();
 
         popupTransferSuccess.SetActive(true);
         transferTargetID.text = "";
